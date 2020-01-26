@@ -10,5 +10,18 @@ const itemCountSpan = document.getElementById('item-count')
 const uncheckedCountSpan = document.getElementById('unchecked-count')
 
 function newTodo() {
-  alert('New TODO button clicked!')
+  const todoText = prompt("Enter TODO");
+  var li = document.createElement("li");
+  let span = document.createElement('span');
+ 
+ 
+  li.appendChild(document.createTextNode(' ' + todoText));
+  
+  list.appendChild(li);
+ 
+  
+ 
+  
+  
+  
 }

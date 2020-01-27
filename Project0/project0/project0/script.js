@@ -18,27 +18,41 @@ function renderCounters() {
 }
 
 function newTodo() {
-  const input = document.createElement('input');
-  input.setAttribute('type', 'checkbox');
   const todoText = prompt("Enter TODO");
-  
-  itemCount += 1;
-  uncheckedCount += 1;
-
-  
   var li = document.createElement("li");
-  li.appendChild(input);
+  itemCount += 1;
+  uncheckedCount += 1;  
   
   const div = document.createElement('div');
   div.textContent = todoText;
   li.appendChild(div);
   
+	
+  
+  const input = document.createElement('input');
+  input.setAttribute('type', 'checkbox');
+  
+  input.addEventListener('click', (event) => {
+    if (event.target.checked) {
+      uncheckedCount -= 1;
+      event.target.parentElement.childNodes[1].setAttribute('class', 'isChecked');
+    }
+    else {
+      uncheckedCount += 1;
+      event.target.parentElement.childNodes[1].setAttribute('class', '');
+    }
+    renderCounters();
+  });
+  li.appendChild(input);
+  
+
+  
   const button = document.createElement('button');
   button.setAttribute('title', 'delete');
   button.textContent = 'delete';
   
-  button.addEventListener('click', () => {
-    const confirmation = confirm('Are you sure you want to delete this Todo?')
+   button.addEventListener('click', () => {
+    const confirmation = confirm('Are you sure you want to delete this TODO?')
     if (confirmation) {
       if (!li.childNodes[0].checked) {
         uncheckedCount -= 1;
@@ -46,15 +60,12 @@ function newTodo() {
       li.parentNode.removeChild(li);
       itemCount -= 1;
       renderCounters();
-			}
-		}
-	)
-  
+    }
+  });
   li.appendChild(button);
-  
+
   list.appendChild(li);
   renderCounters();
-
 }
   
 

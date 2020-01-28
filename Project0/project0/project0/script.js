@@ -27,8 +27,6 @@ function newTodo() {
   div.textContent = todoText;
   li.appendChild(div);
   
-	
-  
   const input = document.createElement('input');
   input.setAttribute('type', 'checkbox');
   
@@ -47,25 +45,27 @@ function newTodo() {
   
 
   
-  const button = document.createElement('button');
-  button.setAttribute('title', 'delete');
-  button.textContent = 'delete';
-  
-   button.addEventListener('click', () => {
-    const confirmation = confirm('Are you sure you want to delete this TODO?')
+  const button = document.createElement('button')
+  button.setAttribute('title', 'delete')
+  button.textContent = 'delete'
+  button.addEventListener('click', deleteTodo(li))
+  li.appendChild(button);
+
+  list.appendChild(li)
+  renderCounters()
+}
+
+function deleteTodo(li) {
+	const confirmation = confirm('Are you sure you want to delete this TODO?')
     if (confirmation) {
       if (!li.childNodes[0].checked) {
         uncheckedCount -= 1;
       }
-      li.parentNode.removeChild(li);
-      itemCount -= 1;
-      renderCounters();
+      li.parentNode.removeChild(li)
+      itemCount -= 1
+      renderCounters()
     }
-  });
-  li.appendChild(button);
-
-  list.appendChild(li);
-  renderCounters();
-}
+  }
+	
   
 

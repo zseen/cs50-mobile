@@ -27,10 +27,10 @@ function newTodo() {
   div.textContent = todoText;
   li.appendChild(div);
   
-  const input = document.createElement('input');
-  input.setAttribute('type', 'checkbox');
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
   
-  input.addEventListener('click', (event) => {
+  checkbox.addEventListener('click', (event) => {
     if (event.target.checked) {
       uncheckedCount -= 1;
       event.target.parentElement.childNodes[1].setAttribute('class', 'isChecked');
@@ -41,31 +41,35 @@ function newTodo() {
     }
     renderCounters();
   });
-  li.appendChild(input);
+  li.appendChild(checkbox);
   
-
-  
-  const button = document.createElement('button')
-  button.setAttribute('title', 'delete')
-  button.textContent = 'delete'
-  button.addEventListener('click', deleteTodo(li))
-  li.appendChild(button);
+  const deleteButton = createDeleteButton()
+  deleteButton.addEventListener('click', () => deleteTodo(li))
+  li.appendChild(deleteButton)
 
   list.appendChild(li)
   renderCounters()
 }
 
 function deleteTodo(li) {
-	const confirmation = confirm('Are you sure you want to delete this TODO?')
-    if (confirmation) {
-      if (!li.childNodes[0].checked) {
-        uncheckedCount -= 1;
-      }
-      li.parentNode.removeChild(li)
-      itemCount -= 1
-      renderCounters()
-    }
+  const confirmation = confirm('Are you sure you want to delete this TODO?')
+  if (confirmation) {
+    if (!li.childNodes[0].checked) {
+	  uncheckedCount -= 1
   }
+  li.parentNode.removeChild(li)
+  itemCount -= 1
+  renderCounters()
+  }
+}
+  
+function createDeleteButton() {
+  const button = document.createElement('button')
+  button.setAttribute('title', 'delete')
+  button.textContent = 'delete'
+  return button
+	
+}
 	
   
 

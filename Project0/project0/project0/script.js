@@ -18,30 +18,22 @@ function renderCounters() {
 }
 
 function newTodo() {
-  const todoText = prompt("Enter TODO");
-  var li = document.createElement("li");
-  itemCount += 1;
-  uncheckedCount += 1;  
+  const todoText = prompt("Enter TODO")
+  if (!todoText) {
+	  prompt("Please enter TODO")  
+  }
+	  
+  var li = document.createElement("li")
+  itemCount += 1
+  uncheckedCount += 1
   
-  const div = document.createElement('div');
+  const div = document.createElement('div')
   div.textContent = todoText;
   li.appendChild(div);
   
-  const checkbox = document.createElement('input');
-  checkbox.setAttribute('type', 'checkbox');
-  
-  checkbox.addEventListener('click', (event) => {
-    if (event.target.checked) {
-      uncheckedCount -= 1;
-      event.target.parentElement.childNodes[1].setAttribute('class', 'isChecked');
-    }
-    else {
-      uncheckedCount += 1;
-      event.target.parentElement.childNodes[1].setAttribute('class', '');
-    }
-    renderCounters();
-  });
-  li.appendChild(checkbox);
+  const checkbox = createCheckbox()
+  checkbox.addEventListener('click', (event) => checkTodo())
+  li.appendChild(checkbox)
   
   const deleteButton = createDeleteButton()
   deleteButton.addEventListener('click', () => deleteTodo(li))
@@ -54,7 +46,7 @@ function newTodo() {
 function deleteTodo(li) {
   const confirmation = confirm('Are you sure you want to delete this TODO?')
   if (confirmation) {
-    if (!li.childNodes[0].checked) {
+    if (!li.childNodes[1].checked) {
 	  uncheckedCount -= 1
   }
   li.parentNode.removeChild(li)
@@ -68,7 +60,24 @@ function createDeleteButton() {
   button.setAttribute('title', 'delete')
   button.textContent = 'delete'
   return button
-	
+}
+
+function createCheckbox() {
+  const checkbox = document.createElement('input')
+  checkbox.setAttribute('type', 'checkbox')
+  return checkbox	
+}
+
+function checkTodo() {
+  if (event.target.checked) {
+    uncheckedCount -= 1
+    event.target.parentElement.childNodes[1].setAttribute('class', 'isChecked')
+   }
+  else {
+    uncheckedCount += 1
+    event.target.parentElement.childNodes[1].setAttribute('class', '')
+   }
+  renderCounters();
 }
 	
   

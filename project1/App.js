@@ -2,12 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 //import {vibrate} from './utils'
 
-const WORKTIME = 25 * 60;
+//const WORKTIME = 25 * 60;
+const WORKTIME = 1 * 60;
 const BREAKTIME = 5 * 60;
 
 export default class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       count: WORKTIME,
       isWorkTimer: true,
@@ -15,7 +16,8 @@ export default class App extends React.Component {
       isBreakTimer: false
     };
   }
-
+  
+  
   componentWillUpdate(nextState) {
     if (nextState.count === 0) {
       vibrate();
@@ -60,22 +62,36 @@ export default class App extends React.Component {
     this.setState({ isPaused: true });
   };
 
-  countDown = () => {
-    this.setState(prevState => ({
-      count: prevState.count - 1,
-    }))
-    return
-  }
 
+
+  countDown2 = () => {
+	setInterval(this.setState(prevState => 
+  ({count: prevState.count - 1})), 1000)
+  console.log(this.state.count)
+  return};
+  
 
   start = () => {
     this.setState({
       isPaused: false,
     })
-    this.countDown()
+   
+	this.countDown()
+	
+  }
+  
+  countDown = () => {
+	  this.interval = setInterval(() => {
+			this.setState({count: this.state.count - 1});
+		}, 1000);  
+  }
+  
+  componentDidMount() {
+	this.toggleStopStart()
+	
   }
 
-
+  
   render() {
     return (
       <View style={styles.container}>
@@ -85,7 +101,7 @@ export default class App extends React.Component {
 
         <Button
           title={this.state.isPaused ? "Start" : "Stop"}
-          onPress={this.toggleStopStart}
+          onPress={() => this.toggleStopStart()}
         />
         <Button title="Reset" onPress={this.reset} />
       </View>

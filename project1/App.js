@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, Button } from "react-native";
 //import {vibrate} from './utils'
 
 //const WORKTIME = 25 * 60;
-const WORKTIME = 1 * 60;
-const BREAKTIME = 5 * 60;
+const WORKTIME = 0.25 * 60;
+//const BREAKTIME = 5 * 60;
+const BREAKTIME = 0.25 * 60;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,12 +20,18 @@ export default class App extends React.Component {
   
   
   componentWillUpdate(nextState) {
-    if (nextState.count === 0) {
-      vibrate();
+	  //console.log("here?")
+    if (this.state.count === 0) {
+		 console.log("here?")
+		
+      //vibrate();
       this.setState(prevState => ({
         count: prevState.isWorkTimer ? BREAKTIME : WORKTIME,
-        isWorkTimer: prevState.isBreakTimer
+        isWorkTimer: prevState.isBreakTimer,
+		isBreakTimer: prevState.isWorkTimer
       }));
+	  clearInterval(this.interval)
+	  this.start()
     }
   }
 
@@ -48,8 +55,14 @@ export default class App extends React.Component {
     if (this.state.isPaused) {
       this.setState({ isPaused: false });
       this.start()
-    } else {
+    } 
+	else {
+	  console.log(this.state.isPaused)
       this.setState({ isPaused: true });
+	  console.log(this.state.isPaused)
+	  const currentCount = this.state.count
+	  clearInterval(this.state.count)
+	  console.log(this.state.count)
     }
   };
 
@@ -62,13 +75,6 @@ export default class App extends React.Component {
     this.setState({ isPaused: true });
   };
 
-
-
-  countDown2 = () => {
-	setInterval(this.setState(prevState => 
-  ({count: prevState.count - 1})), 1000)
-  console.log(this.state.count)
-  return};
   
 
   start = () => {
@@ -91,7 +97,7 @@ export default class App extends React.Component {
 	
   }
 
-  
+   
   render() {
     return (
       <View style={styles.container}>

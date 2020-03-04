@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, Button } from "react-native";
 //import {vibrate} from './utils'
 
 //const WORKTIME = 25 * 60;
-const WORKTIME = 0.25 * 60;
+const WORKTIME = 0.1 * 60;
 //const BREAKTIME = 5 * 60;
-const BREAKTIME = 0.25 * 60;
+const BREAKTIME = 0.1 * 60;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -58,11 +58,8 @@ export default class App extends React.Component {
     } 
 	else {
 	  console.log(this.state.isPaused)
-      this.setState({ isPaused: true });
-	  console.log(this.state.isPaused)
-	  const currentCount = this.state.count
-	  clearInterval(this.state.count)
-	  console.log(this.state.count)
+      this.setState({ isPaused: true })
+	  clearInterval(this.interval)
     }
   };
 

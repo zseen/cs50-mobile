@@ -2,10 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import vibrate from './utils/vibrate.js'
 
-//const WORKTIME = 25 * 60;
-const WORKTIME = 0.1 * 60;
-//const BREAKTIME = 5 * 60;
-const BREAKTIME = 0.1 * 60;
+const WORKTIME = 25 * 60;
+const BREAKTIME = 5 * 60;
+
 
 export default class App extends React.Component {
     constructor(props) {
@@ -18,13 +17,16 @@ export default class App extends React.Component {
         };
     };
 
-    componentWillUpdate() {
-        if (this.state.count === 0) {
+    componentWillUpdate(nextProps, nextState) {
+        if (nextState.count == 0) {
             vibrate();
+        }
+
+        if (this.state.count == 0) {
             this.setState(prevState => ({
                 count: prevState.isWorkTimer ? BREAKTIME : WORKTIME,
                 isWorkTimer: prevState.isBreakTimer,
-                isBreakTimer: prevState.isWorkTimer
+                isBreakTimer: prevState.isWorkTimer,
             }));
             clearInterval(this.interval);
             this.start();
@@ -84,15 +86,16 @@ export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Pomodoro timer!</Text>
-                <Text>{this.state.isWorkTimer ? "Work Timer" : "Break Timer"}</Text>
-                <Text>{this.parseTime(this.state.count)}</Text>
-
-                <Button
-                    title={this.state.isPaused ? "Start" : "Stop"}
-                    onPress={() => this.toggleStopStart()}
-                />
-                <Button title="Reset" onPress={this.reset} />
+                <Text style={styles.largeFont}>Pomodoro timer!</Text>
+                <Text style={styles.mediumFont}>{this.state.isWorkTimer ? "Work Timer" : "Break Timer"}</Text>
+                <Text style={styles.mediumFont}>{this.parseTime(this.state.count)}</Text>
+                <View style={styles.buttonInline}>
+                    <Button
+                        title={this.state.isPaused ? "Start" : "Stop"}
+                        onPress={() => this.toggleStopStart()}
+                    />
+                    <Button title="Reset" onPress={this.reset} />
+                </View>
             </View>
         );
     }
@@ -101,8 +104,19 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-		justifyContent:"center",
-        alignItems: "center"
+        backgroundColor: "#FCF3CF",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    largeFont: {
+        fontSize: 40,
+        marginBottom: 30,
+    },
+    mediumFont: {
+        fontSize: 25,
+        marginBottom: 20,
+    },
+    buttonInline: {
+        flexDirection: 'row',
     }
 });

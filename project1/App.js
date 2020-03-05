@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-//import {vibrate} from './utils'
+import vibrate from './utils/vibrate.js'
 
 //const WORKTIME = 25 * 60;
 const WORKTIME = 0.1 * 60;
@@ -18,10 +18,9 @@ export default class App extends React.Component {
         };
     };
 
-    componentWillUpdate(nextState) {
+    componentWillUpdate() {
         if (this.state.count === 0) {
-            console.log("vibrate")
-            //vibrate();
+            vibrate();
             this.setState(prevState => ({
                 count: prevState.isWorkTimer ? BREAKTIME : WORKTIME,
                 isWorkTimer: prevState.isBreakTimer,
@@ -103,6 +102,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+		justifyContent:"center",
         alignItems: "center"
     }
 });

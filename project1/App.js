@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import vibrate from './utils/vibrate.js'
 
-const WORKTIME_SECONDS = 25 * 60;
-const BREAKTIME_SECONDS = 5 * 60;
+const WORKTIME_SECONDS = 0.1 * 60;
+const BREAKTIME_SECONDS = 0.1 * 60;
 
-const TimerTypeEnum = {"work":1, "break":2}
+const TimerTypeEnum = { "work": 1, "break": 2 }
 Object.freeze(TimerTypeEnum)
 
 export default class App extends React.Component {
@@ -30,22 +30,6 @@ export default class App extends React.Component {
             }));
             clearInterval(this.interval);
             this.start();
-        }
-    };
-
-    parseTime = seconds => {
-        const secondsToRender = seconds % 60;
-        const minutesToRender = Math.trunc(seconds / 60);
-        return (
-            addPaddingZero(minutesToRender) + ":" + addPaddingZero(secondsToRender)
-        );
-
-        function addPaddingZero(number) {
-            if (number < 10) {
-                return "0" + number;
-            } else {
-                return number;
-            }
         }
     };
 
@@ -82,13 +66,28 @@ export default class App extends React.Component {
         }, 1000);
     };
 
+    formatSecondsAsMinutesAndSeconds = seconds => {
+        const secondsToRender = seconds % 60;
+        const minutesToRender = Math.trunc(seconds / 60);
+        return (
+            this.addPaddingZeroWhenNeeded(minutesToRender) + ":" + this.addPaddingZeroWhenNeeded(secondsToRender)
+        );
+    };
+
+    addPaddingZeroWhenNeeded(number) {
+        if (number < 10) {
+            return "0" + number;
+        } else {
+            return number;
+        }
+    }
 
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.largeFont}>Pomodoro timer!</Text>
                 <Text style={styles.mediumFont}>{this.state.timerType == TimerTypeEnum["work"] ? "Work Timer" : "Break Timer"}</Text>
-                <Text style={styles.mediumFont}>{this.parseTime(this.state.remainingSecondsCount)}</Text>
+                <Text style={styles.mediumFont}>{this.formatSecondsAsMinutesAndSeconds(this.state.remainingSecondsCount)}</Text>
                 <View style={styles.buttonInline}>
                     <Button
                         title={this.state.isPaused ? "Start" : "Stop"}

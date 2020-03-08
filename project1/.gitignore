@@ -3,4 +3,4 @@ node_modules/**/*
 .expo-shared/*
 npm-debug.*
 package-lock.json
-web-build/**/*
+web-build/

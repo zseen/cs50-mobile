@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import vibrate from './utils/vibrate.js'
 
-const WORKTIME_SECONDS = 0.1 * 60;
-const BREAKTIME_SECONDS = 0.1 * 60;
+const WORKTIME_SECONDS = 25 * 60;
+const BREAKTIME_SECONDS = 5 * 60;
 
 const TimerTypeEnum = { "work": 1, "break": 2 }
 Object.freeze(TimerTypeEnum)
@@ -80,7 +80,7 @@ export default class App extends React.Component {
         } else {
             return number;
         }
-    }
+    };
 
     render() {
         return (

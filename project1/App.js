@@ -2,31 +2,31 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import vibrate from './utils/vibrate.js'
 
-const WORKTIME = 25 * 60;
-const BREAKTIME = 5 * 60;
+const WORKTIME_SECONDS = 25 * 60;
+const BREAKTIME_SECONDS = 5 * 60;
 
+const TimerTypeEnum = {"work":1, "break":2}
+Object.freeze(TimerTypeEnum)
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: WORKTIME,
-            isWorkTimer: true,
+            remainingSecondsCount: WORKTIME_SECONDS,
+            timerType: TimerTypeEnum["work"],
             isPaused: true,
-            isBreakTimer: false
         };
     };
 
     componentWillUpdate(nextProps, nextState) {
-        if (nextState.count == 0) {
+        if (nextState.remainingSecondsCount === 0) {
             vibrate();
         }
 
-        if (this.state.count == 0) {
+        if (this.state.remainingSecondsCount === 0) {
             this.setState(prevState => ({
-                count: prevState.isWorkTimer ? BREAKTIME : WORKTIME,
-                isWorkTimer: prevState.isBreakTimer,
-                isBreakTimer: prevState.isWorkTimer,
+                remainingSecondsCount: prevState.timerType === TimerTypeEnum["break"] ? BREAKTIME_SECONDS : WORKTIME_SECONDS,
+                timerType: prevState.timerType === TimerTypeEnum["work"] ? TimerTypeEnum["break"] : TimerTypeEnum["work"]
             }));
             clearInterval(this.interval);
             this.start();
@@ -59,10 +59,10 @@ export default class App extends React.Component {
     };
 
     reset = () => {
-        if (this.state.isWorkTimer) {
-            this.setState({ count: WORKTIME });
+        if (this.state.timerType == TimerTypeEnum["work"]) {
+            this.setState({ remainingSecondsCount: WORKTIME_SECONDS });
         } else {
-            this.setState({ count: BREAKTIME });
+            this.setState({ remainingSecondsCount: BREAKTIME_SECONDS });
         }
         this.setState({ isPaused: true });
         clearInterval(this.interval);
@@ -78,7 +78,7 @@ export default class App extends React.Component {
 
     countDown = () => {
         this.interval = setInterval(() => {
-            this.setState({ count: this.state.count - 1 });
+            this.setState({ remainingSecondsCount: this.state.remainingSecondsCount - 1 });
         }, 1000);
     };
 
@@ -87,8 +87,8 @@ export default class App extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.largeFont}>Pomodoro timer!</Text>
-                <Text style={styles.mediumFont}>{this.state.isWorkTimer ? "Work Timer" : "Break Timer"}</Text>
-                <Text style={styles.mediumFont}>{this.parseTime(this.state.count)}</Text>
+                <Text style={styles.mediumFont}>{this.state.timerType == TimerTypeEnum["work"] ? "Work Timer" : "Break Timer"}</Text>
+                <Text style={styles.mediumFont}>{this.parseTime(this.state.remainingSecondsCount)}</Text>
                 <View style={styles.buttonInline}>
                     <Button
                         title={this.state.isPaused ? "Start" : "Stop"}

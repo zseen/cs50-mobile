@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import vibrate from './utils/vibrate.js'
 
-const WORKTIME_SECONDS = 25 * 60;
-const BREAKTIME_SECONDS = 5 * 60;
+const WORKTIME_SECONDS = 1 * 60;
+const BREAKTIME_SECONDS = 2 * 60;
 
 const TimerTypeEnum = { "work": 1, "break": 2 }
 Object.freeze(TimerTypeEnum)
@@ -25,7 +25,7 @@ export default class App extends React.Component {
 
         if (this.state.remainingSecondsCount === 0) {
             this.setState(prevState => ({
-                remainingSecondsCount: prevState.timerType === TimerTypeEnum["break"] ? BREAKTIME_SECONDS : WORKTIME_SECONDS,
+                remainingSecondsCount: prevState.timerType === TimerTypeEnum["work"] ? BREAKTIME_SECONDS : WORKTIME_SECONDS,
                 timerType: prevState.timerType === TimerTypeEnum["work"] ? TimerTypeEnum["break"] : TimerTypeEnum["work"]
             }));
             clearInterval(this.interval);

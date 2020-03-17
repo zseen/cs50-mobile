@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Movies from "./Movies"
 
 import {
   createStackNavigator,
@@ -8,7 +9,7 @@ import {
 } from "react-navigation";
 
 const AppNavigator = createSwitchNavigator({
-  Movies: MoviesScreen,
+  Movies: Movies,
   Search: SearchScreen
 });
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import PropTypes from 'prop-types'
 
 export default class App extends React.Component {
     state = {
@@ -7,20 +8,35 @@ export default class App extends React.Component {
     };
   
   
-    showMoviesList = () => {
+  showMoviesList = () => {
       return (
         <View>
           //moviesList
         </View>
       );
-    }
+    };
+
+  const ScrollViewMovies = () => (
+      <ScrollView>
+        {this.moviesList}
+      </ScrollView>
+    )
   
+
+    this.ScrollViewMovies.propTypes = {
+      moviesList: PropTypes.array,
+    };
     
-    render() {
-      const { search } = this.state;
-        return (
-          this.showSearchBar(search)
-          
-        );
-    }
+    export default ScrollViewMovies;
+    
+   
+    
   }
+
+
+
+
+ 
+
+
+

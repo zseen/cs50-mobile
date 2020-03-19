@@ -2,10 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import PropTypes from 'prop-types'
 
-export default class App extends React.Component {
-    state = {
-      moviesList: [],
-    };
+export default class MovieScreen extends React.Component {
+  state = {
+    moviedetails: []
+  }
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle: navigation.getParam('Title'),
+    } 
+  }
   
   
   showMoviesList = () => {
@@ -16,18 +21,16 @@ export default class App extends React.Component {
       );
     };
 
-  const ScrollViewMovies = () => (
+  ScrollViewMovies = () => (
       <ScrollView>
         {this.moviesList}
       </ScrollView>
     )
   
 
-    this.ScrollViewMovies.propTypes = {
-      moviesList: PropTypes.array,
-    };
+ 
     
-    export default ScrollViewMovies;
+  
     
    
     

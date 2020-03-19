@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Movies from "./Movies"
+import { SearchBar } from 'react-native-elements';
 
 import {
   createStackNavigator,
@@ -8,28 +9,37 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
-const AppNavigator = createSwitchNavigator({
-  Movies: Movies,
-  Search: SearchScreen
-});
 
 
 
+class App extends  React.Component {
 
-export default class App extends React.Component {
+    state = {
+      search: '',
+    };
+  
+    updateSearch = search => {
+      this.setState({ search });
+    };
+  
 
+
+    showSearchBar 
+    render() {
+      const { search } = this.state;
 
   
-  render() {
-
       return (
-     
-      pass
-        
+        <SearchBar
+          placeholder="Type Here..."
+          onChangeText={this.updateSearch}
+          value={search}
+        />
       );
-   
+    }
   }
-}
+  
+export default App;
 
 const styles = StyleSheet.create({
   container: {

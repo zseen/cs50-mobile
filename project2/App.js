@@ -12,34 +12,30 @@ import {
 
 
 
-class App extends  React.Component {
-
-    state = {
-      search: '',
-    };
-  
-    updateSearch = search => {
-      this.setState({ search });
-    };
-  
 
 
-    showSearchBar 
-    render() {
-      const { search } = this.state;
+export default class App extends React.Component {
+  state = {
+    search: '',
+  };
 
-  
-      return (
-        <SearchBar
-          placeholder="Type Here..."
-          onChangeText={this.updateSearch}
-          value={search}
-        />
-      );
-    }
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
+  render() {
+    const { search } = this.state;
+    console.log(search)
+
+    return (
+      <SearchBar
+        placeholder="Type Here..."
+        onChangeText={this.updateSearch}
+        value={search}
+      />
+    );
   }
-  
-export default App;
+}
 
 const styles = StyleSheet.create({
   container: {

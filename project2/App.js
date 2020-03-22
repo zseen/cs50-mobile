@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Movies from "./Movies"
-import { SearchBar } from 'react-native-elements';
+
+import Search from "./searchBar";
 
 import {
   createStackNavigator,
@@ -11,28 +11,16 @@ import {
 
 
 
-
-
-
 export default class App extends React.Component {
   state = {
-    search: '',
+    search : Search
   };
 
-  updateSearch = search => {
-    this.setState({ search });
-  };
+
 
   render() {
-    const { search } = this.state;
-    console.log(search)
-
-    return (
-      <SearchBar
-        placeholder="Type Here..."
-        onChangeText={this.updateSearch}
-        value={search}
-      />
+    return ( 
+      <Search/>
     );
   }
 }

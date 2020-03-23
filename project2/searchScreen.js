@@ -1,22 +1,22 @@
 import { SearchBar } from 'react-native-elements';
 import React from 'react';
 
-class Search extends  React.Component {
+class Search extends React.Component {
   state = {
     search: '',
+    results: {}
   };
 
   updateSearch = search => {
     this.setState({ search });
   };
 
-
   showSearchBar = search => {
-    return(
+    return (
       <SearchBar
-      placeholder="Type here..."
-      onChangeText={this.updateSearch}
-      value={search}
+        placeholder="Type here..."
+        onChangeText={this.updateSearch}
+        value={search}
       />
     )
   };

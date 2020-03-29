@@ -3,29 +3,29 @@ import React from 'react';
 
 class Search extends React.Component {
   state = {
-    search: '',
+    searchQuery: '',
     results: {}
   };
 
-  updateSearch = search => {
-    this.setState({ search });
+  updateSearch = searchQuery => {
+    this.setState({ searchQuery });
   };
 
-  showSearchBar = search => {
+  showSearchBar = searchQuery => {
     return (
       <SearchBar
         placeholder="Type here..."
         onChangeText={this.updateSearch}
-        value={search}
+        value={searchQuery}
       />
     )
   };
 
   render() {
-    const { search } = this.state;
+    const { searchQuery } = this.state;
 
     return (
-      this.showSearchBar(search)
+      this.showSearchBar(searchQuery)
     );
   }
 }

@@ -17,9 +17,11 @@ class Search extends React.Component {
     this.setState({ searchQuery });
   };
 
+
+
   getSearchResults = (searchQuery) => {
     this.showSearchBar(searchQuery)
-
+    
     if(this.state.searchQuery.length < 3) {
       this.setState({
         results: []
@@ -35,8 +37,6 @@ class Search extends React.Component {
         })
       })
       .catch(error=>console.log(error)) 
-
-      return this.results
         
   }
 
@@ -54,7 +54,9 @@ class Search extends React.Component {
     const { searchQuery } = this.state;
 
     return (
+      this.showSearchBar(searchQuery),
       this.getSearchResults(searchQuery)
+     
     );
   }
 }

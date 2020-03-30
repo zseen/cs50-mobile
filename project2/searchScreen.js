@@ -1,7 +1,7 @@
 import { SearchBar } from 'react-native-elements';
 import React from 'react';
 
-const KEY = key
+const KEY = a80984c
 
 class Search extends React.Component {
   constructor(props) {
@@ -17,8 +17,6 @@ class Search extends React.Component {
     this.setState({ searchQuery });
   };
 
-
-
   getSearchResults = (searchQuery) => {
     this.showSearchBar(searchQuery)
     
@@ -28,7 +26,7 @@ class Search extends React.Component {
       })
     }
 
-      fetch(`https://www.omdbapi.com/?apikey=${KEY}&s=${this.state.search}`)
+      fetch(`https://www.omdbapi.com/?apikey=${KEY}&s=${this.state.searchQuery}`)
       .then(response => response.json())
       .then((responseJson)=> {
         this.setState({

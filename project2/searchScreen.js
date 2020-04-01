@@ -1,7 +1,7 @@
 import { SearchBar } from 'react-native-elements';
 import React from 'react';
 
-const KEY = a80984c
+const KEY = 'a80984c'
 
 class Search extends React.Component {
   constructor(props) {
@@ -50,10 +50,10 @@ class Search extends React.Component {
 
   render() {
     const { searchQuery } = this.state;
-
+   
     return (
-      this.showSearchBar(searchQuery),
-      this.getSearchResults(searchQuery)
+      this.getSearchResults(searchQuery),
+      this.results
      
     );
   }

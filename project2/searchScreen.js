@@ -1,63 +1,80 @@
-import { SearchBar } from 'react-native-elements';
-import React from 'react';
+import React from "react";
+import {
+  TouchableHighlight,
+  FlatList,
+  View,
+  TextInput,
+  Text,
+  StyleSheet
+} from "react-native";
+import { fetchMovies } from "./Api";
 
-const KEY = 'a80984c'
+const API_KEY = 'a80984c'
 
-class Search extends React.Component {
+export default class SearchComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: '',
-      loading: true,
-      results: []
+      searchQuery: "",
+      movies: []
+    };
+  }
+ 
+  componentDidUpdate(prevState) {
+    if (this.state.searchQuery !== prevState.searchQuery) {
+      this.getMoviesBySearchQuery(this.state.searchQuery);
     }
-  };
-
-  updateSearch = searchQuery => {
-    this.setState({ searchQuery });
-  };
-
-  getSearchResults = (searchQuery) => {
-    this.showSearchBar(searchQuery)
-    
-    if(this.state.searchQuery.length < 3) {
-      this.setState({
-        results: []
-      })
-    }
-
-      fetch(`https://www.omdbapi.com/?apikey=${KEY}&s=${this.state.searchQuery}`)
-      .then(response => response.json())
-      .then((responseJson)=> {
-        this.setState({
-          loading: false,
-          results: responseJson
-        })
-      })
-      .catch(error=>console.log(error)) 
-        
   }
 
-  showSearchBar = searchQuery => {
+
+  getMoviesBySearchQuery = async searchQuery => {
+    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchQuery}`)
+    .then(response => response.json())
+    .then((responseJson) => {
+      
+      this.setState({
+        movies: responseJson.Search
+        })
+    })
+    .catch(error=>console.log(error)) 
+    }
+
+
+  renderMovieTitle = ({ item }) => {
     return (
-      <SearchBar
-        placeholder="Type here..."
-        onChangeText={this.updateSearch}
-        value={searchQuery}
-      />
-    )
+      <TouchableHighlight
+        underlayColor="white"
+        onPress={() => {
+          this.props.navigation.navigate("MovieRoute", {
+            title: item.title,
+            id: item.imdbID,
+          });
+        }}
+      >
+        <View>
+          <Text>{item.Title}</Text>
+        </View>
+      </TouchableHighlight>
+    );
   };
 
   render() {
-    const { searchQuery } = this.state;
-   
     return (
-      this.getSearchResults(searchQuery),
-      this.results
-     
+      <View >
+        <View >
+          <TextInput
+            placeholder="enter item to search for.."
+            value={this.state.searchQuery}
+            onChangeText={searchQuery => this.setState({ searchQuery })}
+          />
+        </View>
+        <FlatList
+          data={this.state.movies}
+          renderItem={this.renderMovieTitle}
+          keyExtractor={item => item.Title + item.imdbID}
+        />
+      </View>
+    
     );
   }
 }
-
-
-export default Search;

@@ -1,30 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Search from "./searchScreen";
-import {
-  createStackNavigator,
-  createSwitchNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
 
+import {createStackNavigator} from 'react-navigation-stack'
+import {createAppContainer} from 'react-navigation'
+import SearchComponent from './searchScreen.js'
+import MovieComponent from './MovieScreen.js'
 
-export default class App extends React.Component {
-  state = {
-    
-  };
-
-  render() {
-    return (
-      <Search/>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const AppNavigator = createStackNavigator({
+  "MainRoute": SearchComponent,
+  "MovieRoute": MovieComponent,
 });
+
+
+const App = createAppContainer(AppNavigator);
+
+export default App;
+
+
+
+
+

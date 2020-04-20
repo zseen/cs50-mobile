@@ -1,6 +1,4 @@
 import React from 'react';
-//import { StyleSheet, Text, View } from 'react-native';
-
 import {
   Image,
   TouchableOpacity,
@@ -11,7 +9,7 @@ import {
 import { fetchById } from "./Api";
 
 
-export default class MovieComponent extends React.Component {
+export default class MovieInfoComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,14 +31,14 @@ export default class MovieComponent extends React.Component {
     return (
       <View>
         <TouchableOpacity
-          
           onPress={() => {
             this.props.navigation.navigate("MainRoute");
           }}
         >
-          <Text style={styles.touchableText}>Go Back</Text>
+          <Text>Go Back</Text>
         </TouchableOpacity>
         {this.state.movieInfo && this.state.movieInfo.Poster ? (
+          console.log("picture found"),
           <Image
             resizeMode="cover"
             source={{ uri: this.state.movieInfo.Poster }}
@@ -49,15 +47,13 @@ export default class MovieComponent extends React.Component {
         ) : null}
         {this.state.movieInfo && (
           <View>
-            <Text style={styles.title}>{this.state.movieInfo.Title}</Text>
-            <Text>Year: {this.state.movieInfo.Released}</Text>
+            <Text>{this.state.movieInfo.Title}</Text>
+            <Text>Release date: {this.state.movieInfo.Released}</Text>
             <Text>Genre: {this.state.movieInfo.Genre}</Text>
             <Text>Rated: {this.state.movieInfo.Rated}</Text>
-            <Text>{this.state.movieInfo.Director}</Text>
-            <Text>--------------------</Text>
-            <Text>{this.state.movieInfo.Actors}</Text>
-            <Text>--------------------</Text>
-            <Text style={styles.plot}>{this.state.movieInfo.Plot}</Text>
+            <Text>Director: {this.state.movieInfo.Director}</Text>
+            <Text>Actors: {this.state.movieInfo.Actors}</Text>
+            <Text>Plot: {this.state.movieInfo.Plot}</Text>
           </View>
         )}
       </View>
@@ -65,3 +61,20 @@ export default class MovieComponent extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  movieContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 25,
+    borderColor: "orange",
+    padding: 5
+  },
+  image: {
+    width: 300,
+    height: 300,
+    borderColor: "orange",
+    borderWidth: 5,
+    marginBottom: 50
+  }})

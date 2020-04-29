@@ -7,12 +7,13 @@ import SearchComponent from './searchScreen.js'
 import MovieInfoComponent from './MovieScreen.js'
 
 const AppNavigator = createStackNavigator({
-  "MainRoute": SearchComponent,
-  "MovieRoute": MovieInfoComponent,
+  "Find a movie": SearchComponent,
+  "Info": MovieInfoComponent,
 });
 
 
 const App = createAppContainer(AppNavigator);
 
 export default App;
+
 

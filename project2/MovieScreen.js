@@ -32,7 +32,7 @@ export default class MovieInfoComponent extends React.Component {
       <View>
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate("MainRoute");
+            this.props.navigation.navigate("Find a movie");
           }}
         >
           <Text>Go Back</Text>

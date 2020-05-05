@@ -46,13 +46,13 @@ export default class SearchComponent extends React.Component {
         underlayColor="#b879d2"
         onPress={() => {
           this.props.navigation.navigate("Info", {
-            title: item.title,
+            title: item.Title,
             id: item.imdbID,
           });
         }}
       >
         <View>
-          <Text style={styles.boldBlackFont}>{item.Title}</Text>
+      <Text style={[styles.boldBlackFont, styles.smallUpperPadding]}>{item.Title} ({item.Year})</Text>
         </View>
       </TouchableHighlight>
     );
@@ -73,10 +73,9 @@ export default class SearchComponent extends React.Component {
           data={this.state.movies}
           renderItem={this.renderMovieTitle}
           keyExtractor={item => item.Title + item.imdbID}
-          style={styles.smallUpperPadding}
+         
         />
       </View>
-    
     );
   }
 }
@@ -107,10 +106,8 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   smallUpperPadding: {
-    marginTop: 200
-
+    marginTop: 10,
   },
-
   boldBlackFont: {
     fontSize: 23,
     fontWeight: "bold",

@@ -12,14 +12,13 @@ export const fetchMovies = async response => {
     }
   };
   
-  //fetch ID from omdb api
-  export const fetchById = async id => {
-    const url = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`;
-    try {
-      const response = await fetch(url);
-      const results = await response.json();
-      return results;
-    } catch (err) {
-      return console.log(err);
-    }
-  };
+
+export const getMoviesById = async id => {
+    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`)
+    .then(response => response.json())
+    .then((responseJson) => {
+      
+    return responseJson  
+    })
+    .catch(error=>console.log(error)) 
+    };

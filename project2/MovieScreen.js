@@ -6,7 +6,11 @@ import {
   Text,
   StyleSheet
 } from "react-native";
-import { fetchById } from "./Api";
+
+import {getMoviesById} from "./Api"
+
+const API_KEY = 'a80984c'
+
 
 
 export default class MovieInfoComponent extends React.Component {
@@ -19,14 +23,37 @@ export default class MovieInfoComponent extends React.Component {
 
   
   componentDidMount() {
-    this.getMoviesById(this.props.navigation.getParam("id", "n/a"));
-  }
-  
-  getMoviesById = async id => {
-    const results = await fetchById(id);
-    this.setState({ movieInfo: results });
+    
+    
+    this.mov(),
+    console.log(this.movieInfo)
+     
   };
 
+
+
+  mov() {
+    v = getMoviesById(this.props.navigation.getParam("id", "n/a")),
+
+    this.setState({
+      movieInfo: v
+    })
+    
+  };
+  
+  
+  
+  
+
+
+
+
+
+ 
+
+  
+    
+    
   render() {
     return (
       <View>

@@ -14,11 +14,12 @@ export const fetchMovies = async response => {
   
 
 export const getMoviesById = async id => {
-    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`)
-    .then(response => response.json())
-    .then((responseJson) => {
-      
-    return responseJson  
-    })
-    .catch(error=>console.log(error)) 
-    };
+  const url = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${id}`;
+  try {
+    const response = await fetch(url);
+    const { Search } = await response.json();
+    return Search;
+  } catch (err) {
+    return console.log(err);
+  }
+};

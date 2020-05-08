@@ -13,6 +13,7 @@ const API_KEY = 'a80984c'
 
 
 
+
 export default class MovieInfoComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -21,36 +22,51 @@ export default class MovieInfoComponent extends React.Component {
     };
   }
 
+
+
+  // getMoviesById = async id => {
+  //   fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`)
+  //   .then(response => response.json())
+  //   .then((responseJson) => {
+
+  //     // this.setState({
+  //     //   movieInfo: responseJson
+  //     //   })
+      
+  //   console.log("API file: ", responseJson)
+  //   console.log(this.movieInfo)
+
+  //   return responseJson
+
+
+  //   //return responseJson
+  //   })
+  //   .catch(error=> {return(console.log(error))})
+
+  //   };  
+
+
+  getMoviesById2
+
   
-  componentDidMount() {
-    
-    
-    this.mov(),
-    console.log(this.movieInfo)
+
+  async componentDidMount() {
+    const v = await getMoviesById(this.props.navigation.getParam("id", "n/a"))
      
-  };
+     console.log(v)
+  
+     
+     //getMoviesById(this.props.navigation.getParam("id", "n/a")).then((response) => console.log(response) )
 
-
-
-  mov() {
-    v = getMoviesById(this.props.navigation.getParam("id", "n/a")),
 
     this.setState({
       movieInfo: v
     })
-    
+    console.log(this.movieInfo)
+  
+   
+     
   };
-  
-  
-  
-  
-
-
-
-
-
- 
-
   
     
     

@@ -7,10 +7,7 @@ import {
   StyleSheet
 } from "react-native";
 
-import {getMoviesById} from "./Api"
-
-const API_KEY = 'a80984c'
-
+import {getMovieInfoById} from "./Api"
 
 
 
@@ -23,65 +20,29 @@ export default class MovieInfoComponent extends React.Component {
   }
 
 
-
-  // getMoviesById = async id => {
-  //   fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`)
-  //   .then(response => response.json())
-  //   .then((responseJson) => {
-
-  //     // this.setState({
-  //     //   movieInfo: responseJson
-  //     //   })
-      
-  //   console.log("API file: ", responseJson)
-  //   console.log(this.movieInfo)
-
-  //   return responseJson
+  getMovieInfo = async id => {
+    const movieInfo = await getMovieInfoById(id);
+    this.setState({ movieInfo: movieInfo });
+  };
 
 
-  //   //return responseJson
-  //   })
-  //   .catch(error=> {return(console.log(error))})
-
-  //   };  
-
-
-  getMoviesById2
-
-  
-
-  async componentDidMount() {
-    const v = await getMoviesById(this.props.navigation.getParam("id", "n/a"))
-     
-     console.log(v)
-  
-     
-     //getMoviesById(this.props.navigation.getParam("id", "n/a")).then((response) => console.log(response) )
-
-
-    this.setState({
-      movieInfo: v
-    })
-    console.log(this.movieInfo)
-  
-   
-     
+  componentDidMount() {
+    this.getMovieInfo(this.props.navigation.getParam("id", "n/a"));
   };
   
     
-    
   render() {
     return (
-      <View>
+      <View style={styles.mainContainer}>
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate("Find a movie");
-          }}
-        >
-          <Text>Go Back</Text>
-        </TouchableOpacity>
+          this.props.navigation.navigate("Find a movie");
+      }}
+      >
+      <Text style={[styles.smallerBlackFont, styles.bigBottomMargin]}>Go Back</Text>
+      </TouchableOpacity>
+
         {this.state.movieInfo && this.state.movieInfo.Poster ? (
-          console.log("picture found"),
           <Image
             resizeMode="cover"
             source={{ uri: this.state.movieInfo.Poster }}
@@ -90,34 +51,57 @@ export default class MovieInfoComponent extends React.Component {
         ) : null}
         {this.state.movieInfo && (
           <View>
-            <Text>{this.state.movieInfo.Title}</Text>
-            <Text>Release date: {this.state.movieInfo.Released}</Text>
-            <Text>Genre: {this.state.movieInfo.Genre}</Text>
-            <Text>Rated: {this.state.movieInfo.Rated}</Text>
-            <Text>Director: {this.state.movieInfo.Director}</Text>
-            <Text>Actors: {this.state.movieInfo.Actors}</Text>
-            <Text>Plot: {this.state.movieInfo.Plot}</Text>
+            <Text style={styles.boldBlackFont}>{this.state.movieInfo.Title}</Text>
+            <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Release date: {this.state.movieInfo.Released}</Text>
+            <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Genre: {this.state.movieInfo.Genre}</Text>
+            <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Rated: {this.state.movieInfo.Rated}</Text>
+            <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Director: {this.state.movieInfo.Director}</Text>
+            <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Actors: {this.state.movieInfo.Actors}</Text>
+            <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Plot: {this.state.movieInfo.Plot}</Text>
           </View>
         )}
-      </View>
+      </View> 
     );
   }
 }
 
-const styles = StyleSheet.create({
-  movieContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 25,
-    borderColor: "orange",
-    padding: 5
-  },
-  image: {
-    width: 300,
-    height: 300,
-    borderColor: "orange",
-    borderWidth: 5,
-    marginBottom: 50
-  }})
+
+  const styles = StyleSheet.create({
+    mainContainer: {
+      flex: 1,
+      backgroundColor: "#eed5f8",
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 30,
+      borderColor: "#b879d2"
+    },
+    purpleBorder: {
+      backgroundColor: "#eed5f8",
+      borderColor: "#b879d2",
+      borderWidth: 4,
+      borderRadius: 10,
+      marginTop: 80,
+      marginBottom: 50
+    },
+    smallUpperMargin: {
+      marginTop: 10,
+    },
+    boldBlackFont: {
+      fontSize: 23,
+      fontWeight: "bold",
+      color: "black"
+    },
+    smallerBlackFont: {
+      fontSize: 18
+    },
+    bigBottomMargin: {
+      marginBottom: 30
+    },
+    image: {
+      width: 300,
+      height: 300,
+      borderColor: "#b879d2",
+      borderWidth: 7,
+      marginBottom: 60
+    }
+  })

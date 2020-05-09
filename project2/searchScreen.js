@@ -7,9 +7,10 @@ import {
   Text,
   StyleSheet
 } from "react-native";
-import { fetchMovies } from "./Api";
 
-const API_KEY = 'a80984c'
+
+import { findMoviesByQuery } from "./Api";
+
 
 export default class SearchComponent extends React.Component {
   constructor(props) {
@@ -18,25 +19,18 @@ export default class SearchComponent extends React.Component {
       searchQuery: "",
       movies: []
     };
-  }
+  };
  
   componentDidUpdate(prevState) {
-    if (this.state.searchQuery !== prevState.searchQuery) {
+    if (this.state.searchQuery != prevState.searchQuery) {
       this.getMoviesBySearchQuery(this.state.searchQuery);
     }
-  }
+  };
 
 
   getMoviesBySearchQuery = async searchQuery => {
-    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchQuery}`)
-    .then(response => response.json())
-    .then((responseJson) => {
-      
-      this.setState({
-        movies: responseJson.Search
-        })
-    })
-    .catch(error=>console.log(error)) 
+    const movies = await findMoviesByQuery(searchQuery);
+    this.setState({movies: movies})
     }
 
 
@@ -52,7 +46,7 @@ export default class SearchComponent extends React.Component {
         }}
       >
         <View>
-      <Text style={[styles.boldBlackFont, styles.smallUpperPadding]}>{item.Title} ({item.Year})</Text>
+      <Text style={[styles.boldBlackFont, styles.smallUpperMargin]}>{item.Title} ({item.Year})</Text>
         </View>
       </TouchableHighlight>
     );
@@ -105,7 +99,7 @@ const styles = StyleSheet.create({
     padding: 30,
     fontSize: 20
   },
-  smallUpperPadding: {
+  smallUpperMargin: {
     marginTop: 10,
   },
   boldBlackFont: {

@@ -67,7 +67,6 @@ export default class SearchComponent extends React.Component {
           data={this.state.movies}
           renderItem={this.renderMovieTitle}
           keyExtractor={item => item.Title + item.imdbID}
-         
         />
       </View>
     );

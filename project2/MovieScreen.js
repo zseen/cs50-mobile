@@ -35,6 +35,7 @@ export default class MovieInfoComponent extends React.Component {
     return (
       <View style={styles.mainContainer}>
         <TouchableOpacity
+          style={styles.touchOpacity}
           onPress={() => {
           this.props.navigation.navigate("Find a movie");
       }}
@@ -96,6 +97,12 @@ export default class MovieInfoComponent extends React.Component {
     },
     bigBottomMargin: {
       marginBottom: 30
+    },
+    touchOpacity: {
+      backgroundColor: "#b879d2",
+      borderRadius: 10,
+      padding: 15,
+      marginBottom: 40
     },
     image: {
       width: 300,

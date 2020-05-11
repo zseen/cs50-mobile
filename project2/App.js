@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation'
-import SearchComponent from './searchScreen.js'
-import MovieInfoComponent from './MovieScreen.js'
+import SearchComponent from './screens/SearchScreen.js'
+import MovieInfoComponent from './screens/MovieScreen.js'
 
 
 

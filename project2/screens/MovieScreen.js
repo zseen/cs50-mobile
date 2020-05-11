@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from "react-native";
 
-import { getMovieInfoById } from "./Api"
+import { getMovieInfoById } from "../API/Api"
 
 
 

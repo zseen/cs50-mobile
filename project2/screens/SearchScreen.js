@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 
-import { findMoviesByQuery } from "./Api";
+import { findMoviesByQuery } from "../API/Api";
 
 
 export default class SearchComponent extends React.Component {

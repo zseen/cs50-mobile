@@ -1,8 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import {createStackNavigator} from 'react-navigation-stack'
-import {createAppContainer} from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createAppContainer } from 'react-navigation'
 import SearchComponent from './searchScreen.js'
 import MovieInfoComponent from './MovieScreen.js'
 

@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from "react-native";
 
-import {getMovieInfoById} from "./Api"
+import { getMovieInfoById } from "./Api"
 
 
 
@@ -17,7 +17,7 @@ export default class MovieInfoComponent extends React.Component {
     this.state = {
       movieInfo: null
     };
-  }
+  };
 
 
   getMovieInfo = async id => {
@@ -29,28 +29,28 @@ export default class MovieInfoComponent extends React.Component {
   componentDidMount() {
     this.getMovieInfo(this.props.navigation.getParam("id", "n/a"));
   };
-  
-    
+
+
   render() {
     return (
       <View style={styles.mainContainer}>
         <TouchableOpacity
           style={styles.touchOpacity}
           onPress={() => {
-          this.props.navigation.navigate("Find a movie");
-      }}
-      >
-      <Text style={[styles.smallerBlackFont, styles.bigBottomMargin]}>Go Back</Text>
-      </TouchableOpacity>
+            this.props.navigation.navigate("Find a movie");
+          }}
+        >
+          <Text style={[styles.smallerBlackFont, styles.bigBottomMargin]}>Go Back</Text>
+        </TouchableOpacity>
 
-        {this.state.movieInfo && this.state.movieInfo.Poster ? (
+        {this.state.movieInfo ? (
           <Image
             resizeMode="cover"
             source={{ uri: this.state.movieInfo.Poster }}
             style={styles.image}
           />
         ) : null}
-        {this.state.movieInfo && (
+        {this.state.movieInfo ? (
           <View>
             <Text style={styles.boldBlackFont}>{this.state.movieInfo.Title}</Text>
             <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Release date: {this.state.movieInfo.Released}</Text>
@@ -60,55 +60,55 @@ export default class MovieInfoComponent extends React.Component {
             <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Actors: {this.state.movieInfo.Actors}</Text>
             <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Plot: {this.state.movieInfo.Plot}</Text>
           </View>
-        )}
-      </View> 
+        ) : null}
+      </View>
     );
+  };
+};
+
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "#eed5f8",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 30,
+    borderColor: "#b879d2"
+  },
+  purpleBorder: {
+    backgroundColor: "#eed5f8",
+    borderColor: "#b879d2",
+    borderWidth: 4,
+    borderRadius: 10,
+    marginTop: 80,
+    marginBottom: 50
+  },
+  smallUpperMargin: {
+    marginTop: 10,
+  },
+  boldBlackFont: {
+    fontSize: 23,
+    fontWeight: "bold",
+    color: "black"
+  },
+  smallerBlackFont: {
+    fontSize: 18
+  },
+  bigBottomMargin: {
+    marginBottom: 30
+  },
+  touchOpacity: {
+    backgroundColor: "#b879d2",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 40
+  },
+  image: {
+    width: 300,
+    height: 300,
+    borderColor: "#b879d2",
+    borderWidth: 7,
+    marginBottom: 60
   }
-}
-
-
-  const styles = StyleSheet.create({
-    mainContainer: {
-      flex: 1,
-      backgroundColor: "#eed5f8",
-      alignItems: "center",
-      justifyContent: "center",
-      borderWidth: 30,
-      borderColor: "#b879d2"
-    },
-    purpleBorder: {
-      backgroundColor: "#eed5f8",
-      borderColor: "#b879d2",
-      borderWidth: 4,
-      borderRadius: 10,
-      marginTop: 80,
-      marginBottom: 50
-    },
-    smallUpperMargin: {
-      marginTop: 10,
-    },
-    boldBlackFont: {
-      fontSize: 23,
-      fontWeight: "bold",
-      color: "black"
-    },
-    smallerBlackFont: {
-      fontSize: 18
-    },
-    bigBottomMargin: {
-      marginBottom: 30
-    },
-    touchOpacity: {
-      backgroundColor: "#b879d2",
-      borderRadius: 10,
-      padding: 15,
-      marginBottom: 40
-    },
-    image: {
-      width: 300,
-      height: 300,
-      borderColor: "#b879d2",
-      borderWidth: 7,
-      marginBottom: 60
-    }
-  })
+})

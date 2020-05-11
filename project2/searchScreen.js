@@ -20,7 +20,7 @@ export default class SearchComponent extends React.Component {
       movies: []
     };
   };
- 
+
   componentDidUpdate(prevState) {
     if (this.state.searchQuery != prevState.searchQuery) {
       this.getMoviesBySearchQuery(this.state.searchQuery);
@@ -30,8 +30,8 @@ export default class SearchComponent extends React.Component {
 
   getMoviesBySearchQuery = async searchQuery => {
     const movies = await findMoviesByQuery(searchQuery);
-    this.setState({movies: movies})
-    }
+    this.setState({ movies: movies })
+  };
 
 
   renderMovieTitle = ({ item }) => {
@@ -46,7 +46,7 @@ export default class SearchComponent extends React.Component {
         }}
       >
         <View>
-      <Text style={[styles.boldBlackFont, styles.smallUpperMargin]}>{item.Title} ({item.Year})</Text>
+          <Text style={[styles.boldBlackFont, styles.smallUpperMargin]}>{item.Title} ({item.Year})</Text>
         </View>
       </TouchableHighlight>
     );
@@ -70,8 +70,8 @@ export default class SearchComponent extends React.Component {
         />
       </View>
     );
-  }
-}
+  };
+};
 
 const styles = StyleSheet.create({
   mainContainer: {

@@ -1,4 +1,4 @@
-[import React from 'react';
+import React from 'react';
 import {
   Image,
   TouchableOpacity,
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
     borderWidth: 7,
     marginBottom: 60
   }
-})]
+})

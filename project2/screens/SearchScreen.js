@@ -1,4 +1,4 @@
-[import React from "react";
+import React from "react";
 import {
   TouchableHighlight,
   FlatList,
@@ -20,7 +20,7 @@ export default class SearchComponent extends React.Component {
       movies: []
     };
   };
-  
+
 
   componentDidUpdate(prevState) {
     if (this.state.searchQuery != prevState.searchQuery) {
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "black"
   }
-})]
+})

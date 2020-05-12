@@ -1,4 +1,4 @@
-import React from 'react';
+[import React from 'react';
 import {
   Image,
   TouchableOpacity,
@@ -45,8 +45,6 @@ export default class MovieInfoComponent extends React.Component {
             <Text style={[styles.smallerBlackFont, styles.bigBottomMargin]}>Go Back</Text>
           </TouchableOpacity>
 
-
-
           {this.state.movieInfo ? (
             <Image
               resizeMode="cover"
@@ -68,7 +66,6 @@ export default class MovieInfoComponent extends React.Component {
           ) : null}
         </View>
       </ScrollView>
-
     );
   };
 };
@@ -123,4 +120,4 @@ const styles = StyleSheet.create({
     borderWidth: 7,
     marginBottom: 60
   }
-})
+})]

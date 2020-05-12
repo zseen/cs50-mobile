@@ -28,6 +28,8 @@ export default class SearchComponent extends React.Component {
   };
 
 
+
+
   getMoviesBySearchQuery = async searchQuery => {
     const movies = await findMoviesByQuery(searchQuery);
     this.setState({ movies: movies })
@@ -67,6 +69,7 @@ export default class SearchComponent extends React.Component {
           data={this.state.movies}
           renderItem={this.renderMovieTitle}
           keyExtractor={item => item.Title + item.imdbID}
+          style={styles.smallSidePadding}
         />
       </View>
     );
@@ -100,6 +103,11 @@ const styles = StyleSheet.create({
   },
   smallUpperMargin: {
     marginTop: 10,
+  },
+  smallSidePadding: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20
   },
   boldBlackFont: {
     fontSize: 23,

@@ -1,8 +1,7 @@
-const API_KEY = None
+const API_KEY = 
 
-
-export const findMoviesByQuery = async response => {
-  const url = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${response}`;
+export const findMoviesByQuery = async searchQuery => {
+  const url = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchQuery}`;
   try {
     const response = await fetch(url);
     const responseJson = await response.json();

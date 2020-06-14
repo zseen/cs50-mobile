@@ -19,61 +19,55 @@ export default class SearchComponent extends React.Component {
       searchQuery: "",
       movies: []
     };
+
   };
 
-
-  componentDidUpdate(prevState) {
-    if (this.state.searchQuery != prevState.searchQuery) {
-      this.getMoviesBySearchQuery(this.state.searchQuery);
-    }
-  };
+getMoviesBySearchQuery = async(searchQuery) => {
+  this.setState({ searchQuery: searchQuery,
+    movies: await findMoviesByQuery(searchQuery) })
+};
 
 
-  getMoviesBySearchQuery = async searchQuery => {
-    const movies = await findMoviesByQuery(searchQuery);
-    this.setState({ movies: movies })
-  };
+renderMovieTitle = ({ item }) => {
+  return (
+    <TouchableHighlight
+      underlayColor="#b879d2"
+      onPress={() => {
+        this.props.navigation.navigate("Info", {
+          title: item.Title,
+          id: item.imdbID,
+        });
+      }}
+    >
+      <View>
+        <Text style={[styles.boldBlackFont, styles.smallUpperMargin]}>{item.Title} ({item.Year})</Text>
+      </View>
+    </TouchableHighlight>
+  );
+};
 
-
-  renderMovieTitle = ({ item }) => {
-    return (
-      <TouchableHighlight
-        underlayColor="#b879d2"
-        onPress={() => {
-          this.props.navigation.navigate("Info", {
-            title: item.Title,
-            id: item.imdbID,
-          });
-        }}
-      >
-        <View>
-          <Text style={[styles.boldBlackFont, styles.smallUpperMargin]}>{item.Title} ({item.Year})</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  };
-
-  render() {
-    return (
-      <View style={styles.mainContainer}>
-        <View style={styles.purpleBorder}>
-          <TextInput
-            placeholder="Movie title"
-            value={this.state.searchQuery}
-            onChangeText={searchQuery => this.setState({ searchQuery })}
-            style={styles.purpleSmallBox}
-          />
-        </View>
-        <FlatList
-          data={this.state.movies}
-          renderItem={this.renderMovieTitle}
-          keyExtractor={item => item.Title + item.imdbID}
-          style={styles.smallSidePadding}
+render() {
+  return (
+    <View style={styles.mainContainer}>
+      <View style={styles.purpleBorder}>
+        <TextInput
+          placeholder="Movie title"
+          value={this.state.searchQuery}
+          onChangeText={this.getMoviesBySearchQuery}
+          style={styles.purpleSmallBox}
         />
       </View>
-    );
-  };
+      <FlatList
+        data={this.state.movies}
+        renderItem={this.renderMovieTitle}
+        keyExtractor={item => item.Title + item.imdbID}
+        style={styles.smallSidePadding}
+      />
+    </View>
+  );
 };
+};
+
 
 const styles = StyleSheet.create({
   mainContainer: {

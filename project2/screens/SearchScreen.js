@@ -19,14 +19,13 @@ export default class SearchComponent extends React.Component {
       searchQuery: "",
       movies: []
     };
-
   };
 
 getMoviesBySearchQuery = async(searchQuery) => {
+  const movies = await findMoviesByQuery(searchQuery)
   this.setState({ searchQuery: searchQuery,
-    movies: await findMoviesByQuery(searchQuery) })
+    movies: movies })
 };
-
 
 renderMovieTitle = ({ item }) => {
   return (

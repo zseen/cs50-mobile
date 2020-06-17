@@ -1,13 +1,16 @@
-const API_KEY = 
+const API_KEY = 'a80984c'
 
 export const findMoviesByQuery = async searchQuery => {
   const url = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchQuery}`;
   try {
     const response = await fetch(url);
     const responseJson = await response.json();
-    return responseJson.Search;
+    // if (!responseJson.Search){
+    //   throw "No movies found"
+    // }
+    return responseJson.Search;  
   } catch (error) {
-    return console.log(error);
+    return (error);
   }
 };
 

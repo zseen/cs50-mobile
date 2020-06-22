@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.9.4",
     "@react-native-community/masked-view": "0.1.6",
+    "build-url": "^2.0.0",
     "expo": "^37.0.0",
     "navigation": "^5.3.1",
     "prop-types": "^15.7.2",

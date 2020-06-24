@@ -10,6 +10,7 @@ import {
 
 
 import { findMoviesByQuery } from "../API/Api";
+import { lightPurple, darkPurple } from  "../style/Colors"
 
 
 export default class SearchComponent extends React.Component {
@@ -23,7 +24,6 @@ export default class SearchComponent extends React.Component {
 
 getMoviesBySearchQuery = async(searchQuery) => {
   this.setState({searchQuery: searchQuery})
-
   if (searchQuery.length >= 3){
     const movies = await findMoviesByQuery(searchQuery)
     this.setState({ movies: movies })
@@ -33,11 +33,11 @@ getMoviesBySearchQuery = async(searchQuery) => {
 renderMovieTitle = ({ item }) => {
   return (
     <TouchableHighlight
-      underlayColor="#b879d2"
+      underlayColor = {darkPurple}
       onPress={() => {
         this.props.navigation.navigate("Info", {
-          title: item.Title,
-          id: item.imdbID,
+          //title: item.Title,
+          id: item.imdbID
         });
       }}
     >
@@ -62,7 +62,7 @@ render() {
       <FlatList
         data={this.state.movies}
         renderItem={this.renderMovieTitle}
-        keyExtractor={item => item.Title + item.imdbID}
+        keyExtractor={item => item.imdbID}
         style={styles.smallSidePadding}
       />
     </View>
@@ -74,23 +74,23 @@ render() {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#eed5f8",
+    backgroundColor: lightPurple,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 30,
-    borderColor: "#b879d2"
+    borderColor: darkPurple
   },
   purpleBorder: {
-    backgroundColor: "#eed5f8",
-    borderColor: "#b879d2",
+    backgroundColor: lightPurple,
+    borderColor: darkPurple,
     borderWidth: 4,
     borderRadius: 10,
     marginTop: 80,
     marginBottom: 50
   },
   purpleSmallBox: {
-    backgroundColor: "#eed5f8",
-    borderColor: "#b879d2",
+    backgroundColor: lightPurple,
+    borderColor: darkPurple,
     borderWidth: 3,
     width: 220,
     padding: 30,

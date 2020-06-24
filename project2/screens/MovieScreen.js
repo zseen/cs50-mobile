@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import { getMovieInfoById } from "../API/Api"
+import { lightPurple, darkPurple } from  "../style/Colors"
 
 
 
@@ -20,15 +21,15 @@ export default class MovieInfoComponent extends React.Component {
     };
   };
 
-
   getMovieInfo = async id => {
     const movieInfo = await getMovieInfoById(id);
     this.setState({ movieInfo: movieInfo });
+    console.log("movieInfo in getMovieInfo: ", movieInfo)
   };
 
 
   componentDidMount() {
-    this.getMovieInfo(this.props.navigation.getParam("id", "n/a"));
+    this.getMovieInfo(this.props.navigation.getParam("id"));
   };
 
 
@@ -48,11 +49,11 @@ export default class MovieInfoComponent extends React.Component {
           {this.state.movieInfo ? (
             <Image
               resizeMode="cover"
-              source={{ uri: this.state.movieInfo.Poster }}
+              source={{ uri: this.state.movieInfo.Poster }} 
               style={styles.image}
             />
-          ) : null}
-
+            ) : null } 
+         
           {this.state.movieInfo ? (
             <View style={styles.smallSidePadding}>
               <Text style={styles.boldBlackFont}>{this.state.movieInfo.Title}</Text>
@@ -74,15 +75,15 @@ export default class MovieInfoComponent extends React.Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#eed5f8",
+    backgroundColor: lightPurple,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 30,
-    borderColor: "#b879d2"
+    borderColor: darkPurple
   },
   purpleBorder: {
-    backgroundColor: "#eed5f8",
-    borderColor: "#b879d2",
+    backgroundColor: lightPurple,
+    borderColor: darkPurple,
     borderWidth: 4,
     borderRadius: 10,
     marginTop: 80,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   touchOpacity: {
-    backgroundColor: "#b879d2",
+    backgroundColor: darkPurple,
     borderRadius: 10,
     padding: 15,
     marginBottom: 40
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 300,
-    borderColor: "#b879d2",
+    borderColor: darkPurple,
     borderWidth: 7,
     marginBottom: 60
   }

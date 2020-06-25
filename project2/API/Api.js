@@ -1,4 +1,4 @@
-const API_KEY = 'a80984c'
+const API_KEY = null
 
 
 const buildURLWithQuery = (queryString, queryValue) => {

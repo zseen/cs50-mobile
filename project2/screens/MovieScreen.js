@@ -9,8 +9,7 @@ import {
 } from "react-native";
 
 import { getMovieInfoById } from "../API/Api"
-import { lightPurple, darkPurple } from  "../style/Colors"
-
+import { lightPurple, darkPurple } from "../style/Colors"
 
 
 export default class MovieInfoComponent extends React.Component {
@@ -24,14 +23,11 @@ export default class MovieInfoComponent extends React.Component {
   getMovieInfo = async id => {
     const movieInfo = await getMovieInfoById(id);
     this.setState({ movieInfo: movieInfo });
-    console.log("movieInfo in getMovieInfo: ", movieInfo)
   };
-
 
   componentDidMount() {
     this.getMovieInfo(this.props.navigation.getParam("id"));
   };
-
 
   render() {
     return (
@@ -49,11 +45,11 @@ export default class MovieInfoComponent extends React.Component {
           {this.state.movieInfo ? (
             <Image
               resizeMode="cover"
-              source={{ uri: this.state.movieInfo.Poster }} 
+              source={{ uri: this.state.movieInfo.Poster }}
               style={styles.image}
             />
-            ) : null } 
-         
+          ) : null}
+
           {this.state.movieInfo ? (
             <View style={styles.smallSidePadding}>
               <Text style={styles.boldBlackFont}>{this.state.movieInfo.Title}</Text>

@@ -1,4 +1,5 @@
-const API_KEY = 
+const API_KEY = None
+
 
 const buildURLWithQuery = (queryString, queryValue) => {
   const url = new URL('http://www.omdbapi.com')
@@ -7,27 +8,26 @@ const buildURLWithQuery = (queryString, queryValue) => {
   return url
 }
 
+const makeAPIrequest = async url => {
+  try {
+    const response = await fetch(url);
+    const responseJson = await response.json()
+    return responseJson
+  } catch (error) {
+    return (error);
+  }
+}
 
 export const findMoviesByQuery = async searchQuery => {
   const url = buildURLWithQuery("s", searchQuery)
-  console.log(url)
-  try {
-    const response = await fetch(url);
-    const responseJson = await response.json();
-    return responseJson.Search;  
-  } catch (error) {
-    return (error);
+  const APIresult = await makeAPIrequest(url)
+  if (APIresult){
+    return APIresult.Search
   }
 };
 
-
 export const getMovieInfoById = async id => {
   const url = buildURLWithQuery("i", id)
-  try {
-    const response = await fetch(url);
-    const responseJson = await response.json();
-    return responseJson;
-  } catch (error) {
-    return (error);
-  }
+  const movieInfo = await makeAPIrequest(url)
+  return movieInfo
 };

@@ -1,6 +1,6 @@
 node_modules/**/*
 .expo/*
-success/**/*
+success/
 .expo-shared/*
 npm-debug.*
 package-lock.json

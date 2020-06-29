@@ -43,23 +43,23 @@ export default class MovieInfoComponent extends React.Component {
           </TouchableOpacity>
 
           {this.state.movieInfo ? (
-            <Image
-              resizeMode="cover"
-              source={{ uri: this.state.movieInfo.Poster }}
-              style={styles.image}
-            />
-          ) : null}
+            <>
+              <Image
+                resizeMode="cover"
+                source={{ uri: this.state.movieInfo.Poster }}
+                style={styles.image}
+              />
 
-          {this.state.movieInfo ? (
-            <View style={styles.smallSidePadding}>
-              <Text style={styles.boldBlackFont}>{this.state.movieInfo.Title}</Text>
-              <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Release date: {this.state.movieInfo.Released}</Text>
-              <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Genre: {this.state.movieInfo.Genre}</Text>
-              <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Rated: {this.state.movieInfo.Rated}</Text>
-              <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Director: {this.state.movieInfo.Director}</Text>
-              <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Actors: {this.state.movieInfo.Actors}</Text>
-              <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Plot: {this.state.movieInfo.Plot}</Text>
-            </View>
+              <View style={styles.smallSidePadding}>
+                <Text style={styles.boldBlackFont}>{this.state.movieInfo.Title}</Text>
+                <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Release date: {this.state.movieInfo.Released}</Text>
+                <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Genre: {this.state.movieInfo.Genre}</Text>
+                <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Rated: {this.state.movieInfo.Rated}</Text>
+                <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Director: {this.state.movieInfo.Director}</Text>
+                <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Actors: {this.state.movieInfo.Actors}</Text>
+                <Text style={[styles.smallerBlackFont, styles.smallUpperMargin]}>Plot: {this.state.movieInfo.Plot}</Text>
+              </View>
+            </>
           ) : null}
         </View>
       </ScrollView>

@@ -35,7 +35,7 @@ export default class SearchComponent extends React.Component {
       <TouchableHighlight
         underlayColor={darkPurple}
         onPress={() => {
-          this.props.navigation.navigate("Info", {
+          this.props.navigation.navigate("Details", {
             id: item.imdbID
           });
         }}

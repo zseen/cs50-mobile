@@ -12,7 +12,7 @@ import { getMovieInfoById } from "../API/Api"
 import { lightPurple, darkPurple } from "../style/Colors"
 
 
-export default class MovieInfoComponent extends React.Component {
+export default class MovieDetailsComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

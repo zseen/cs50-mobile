@@ -1,3 +1,9 @@
 node_modules/**/*
 .expo/*
+success/.expo/settings.json
+.expo-shared/*
 npm-debug.*
+package-lock.json
+web-build/
+.babelrc
+babel.config.cjs

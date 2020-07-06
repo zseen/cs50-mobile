@@ -1,21 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack'
+import { createAppContainer } from 'react-navigation'
+import SearchComponent from './screens/SearchScreen.js'
+import MovieInfoComponent from './screens/MovieDetailsScreen.js'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const AppNavigator = createStackNavigator({
+  "Find a movie": SearchComponent,
+  "Details": MovieInfoComponent,
 });
+
+const App = createAppContainer(AppNavigator);
+
+export default App;
